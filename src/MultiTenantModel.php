@@ -6,7 +6,7 @@ use MultiTenant\Tenant;
 use Origin\Model\Model;
 
 /**
- * Multitenant model - sidestepping callbacks
+ * Multitenant model - side stepping callbacks
  */
 class MultiTenantModel extends Model
 {
