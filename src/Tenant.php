@@ -54,7 +54,7 @@ class Tenant
         if (! is_integer($id) and ! is_string($id)) {
             throw new InvalidArgumentException('Invalid Tenant ID');
         }
-
+      
         static::$id = $id;
         static::$foreignKey = $options['foreignKey'];
     }

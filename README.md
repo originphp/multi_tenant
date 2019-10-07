@@ -1,17 +1,17 @@
-# Multi Tenant Plugin (Beta)
+# Multi Tenant Plugin
 
 The `MultiTenant` plugin enables you to make your web application multi-tenant using a single database.
 
-
 ## Models
 
-Extend any models using the `MultiTenantModel` and then add the column `tenant_id` to your database (and schema)
+Add the `Tenantable` trait to any model and then add the column `tenant_id` to your database (and schema)
 
 ```php
-use MultiTenant\MultiTenantModel;
-class Contact extends MultiTenantModel
-{
+use MultiTenant\Tenantable;
 
+class Contact extends ApplicationModel
+{
+    use Tenantable;
 }
 ```
 
@@ -24,7 +24,7 @@ use MultiTenant\Tenant;
 
 class AppController extends Controller
 {
-    public function initialize()
+    public function initialize() : void
     {
         $this->loadComponent('Auth');
 
@@ -44,4 +44,4 @@ Tenant::initialize($userId, [
 ]);
 ```
 
-That is it, as long a tenant is initialized, any model finds will add the `tenant id`, and when you create a record the tenant id will be added automatically.
+That is it, as long the `Tenant` instance has been initialized, any model that finds will add the `tenant id` to query, and when you create a record the tenant id will be added automatically.

@@ -2,13 +2,11 @@
 namespace MultiTenant;
 
 use Origin\Model\Entity;
-use MultiTenant\Tenant;
-use Origin\Model\Model;
 
 /**
- * Multitenant model - side stepping callbacks
+ * Multitenant Concern - sidestepping callbacks
  */
-class MultiTenantModel extends Model
+trait Tenantable
 {
     /**
      * Runs a find query
@@ -30,7 +28,7 @@ class MultiTenantModel extends Model
     {
         if (Tenant::initialized()) {
             $foreignKey = Tenant::foreignKey();
-            $options['conditions'][$foreignKey ] = Tenant::id();
+            $options['conditions'][$foreignKey] = Tenant::id();
         }
        
         return parent::find($type, $options);
@@ -50,12 +48,15 @@ class MultiTenantModel extends Model
     *
     * # Callbacks
     *
-    * The following callbacks will called in this Model and enabled Behaviors
+    * The following callbacks will called in this Model
     *
     * - beforeValidate
     * - afterValidate
     * - beforeSave
+    * - beforeCreate/beforeCreate
+    * - afterCreate/afterUpdate
     * - afterSave
+    * - afterCommit/afterRollback
     *
     * @param entity $entity to save
     * @param array  $options keys (validate,callbacks,transaction,associated)
@@ -63,10 +64,11 @@ class MultiTenantModel extends Model
     */
     public function save(Entity $data, array $options = []) : bool
     {
-        if (Tenant::initialized()) {
+        if (Tenant::initialized() and ! $data->exists()) {
             $foreignKey = Tenant::foreignKey();
             $data->$foreignKey = Tenant::id();
         }
+  
         return parent::save($data);
     }
 }
