@@ -16,7 +16,7 @@ class Product extends Model
  */
 class MultiTenantModelTest extends OriginTestCase
 {
-    public $fixtures = ['MultiTenant.User','MultiTenant.Product'];
+    protected $fixtures = ['MultiTenant.User','MultiTenant.Product'];
 
     public function startup() : void
     {

@@ -5,7 +5,7 @@ use Origin\TestSuite\Fixture;
 
 class UserFixture extends Fixture
 {
-    public $schema = [
+    protected $schema = [
         'columns' => [
             'id' => ['type' => 'integer', 'limit' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'autoIncrement' => true],
             'first_name' => ['type' => 'string', 'limit' => 40, 'null' => false, 'default' => null],
@@ -25,7 +25,7 @@ class UserFixture extends Fixture
         'options' => ['engine' => 'InnoDB', 'autoIncrement'=>1000]
     ];
     
-    public $records = [
+    protected $records = [
         [
             'first_name' => 'Jon',
             'last_name' => 'Snow',

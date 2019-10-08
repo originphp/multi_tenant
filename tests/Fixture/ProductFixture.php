@@ -5,7 +5,7 @@ use Origin\TestSuite\Fixture;
 
 class ProductFixture extends Fixture
 {
-    public $schema = [
+    protected $schema = [
         'columns' => [
             'id' => ['type' => 'integer', 'limit' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'autoIncrement' => true],
             'user_id' => ['type'=>'integer','default'=>null],
@@ -21,7 +21,7 @@ class ProductFixture extends Fixture
         'options' => ['engine' => 'InnoDB', 'autoIncrement'=>1000]
     ];
     
-    public $records = [
+    protected $records = [
         [
             'user_id' => 1000,
             'name' => 'Widget #1',
