@@ -22,7 +22,7 @@ class UserFixture extends Fixture
             'primary' => ['type' => 'primary', 'column' => 'id']
         ],
         'indexes' => [],
-        'options' => ['engine' => 'InnoDB', 'autoIncrement'=>1000]
+        'options' => ['engine' => 'InnoDB', 'autoIncrement' => 1000]
     ];
     
     protected $records = [
