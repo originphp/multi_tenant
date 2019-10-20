@@ -18,7 +18,7 @@ class MultiTenantModelTest extends OriginTestCase
 {
     protected $fixtures = ['MultiTenant.User','MultiTenant.Product'];
 
-    public function startup() : void
+    protected function startup() : void
     {
         $this->loadModel('Product', [
             'className' => Product::class
