@@ -13,7 +13,7 @@
  */
 namespace MultiTenant;
 
-use Origin\Exception\InvalidArgumentException;
+use Origin\Core\Exception\InvalidArgumentException;
 
 /**
  * This is the Tenant Manager to use
