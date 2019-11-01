@@ -68,7 +68,7 @@ trait Tenantable
      *
      * @param \Origin\Model\Entity $data
      * @param ArrayObject $options
-     * @return void
+     * @return bool
      */
     protected function tenantBeforeDelete(Entity $data, ArrayObject $options) : bool
     {
