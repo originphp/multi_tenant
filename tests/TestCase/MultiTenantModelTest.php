@@ -5,10 +5,11 @@ use MultiTenant\Tenant;
 use Origin\Model\Model;
 use MultiTenant\Tenantable;
 use Origin\TestSuite\OriginTestCase;
+use Origin\Model\Concern\Timestampable;
 
 class Product extends Model
 {
-    use Tenantable;
+    use Tenantable, Timestampable;
 }
 
 /**
@@ -18,7 +19,7 @@ class MultiTenantModelTest extends OriginTestCase
 {
     protected $fixtures = ['MultiTenant.User','MultiTenant.Product'];
 
-    protected function startup() : void
+    protected function setUp() : void
     {
         $this->loadModel('Product', [
             'className' => Product::class
@@ -44,23 +45,40 @@ class MultiTenantModelTest extends OriginTestCase
         $this->assertEquals(1, count($results));
     }
 
+    public function testCreateRecord()
+    {
+        Tenant::initialize(1000, [
+            'foreignKey' => 'user_id'
+        ]);
+        $product = $this->Product->new(['name' => 'foo','description' => 'none']);
+        $this->assertTrue($this->Product->save($product));
+        $this->assertEquals(1000, $product->user_id);
+    }
+
+    /**
+     * @depends testCreateRecord
+     */
     public function testDelete()
     {
         Tenant::initialize(1000, [
             'foreignKey' => 'user_id'
         ]);
 
-        $product = $this->Product->new(['id' => 1002]);
-        $this->assertFalse($this->Product->delete($product));
-
-        $product = $this->Product->new(['id' => 1001]);
+        // test Delete with user_id
+        $product = $this->Product->new(['name' => 'foo','description' => 'none']);
+        $this->assertTrue($this->Product->save($product));
         $this->assertTrue($this->Product->delete($product));
+    }
 
-        Tenant::initialize(1001, [
+    public function testDeleteOtherTenant()
+    {
+        Tenant::initialize(1000, [
             'foreignKey' => 'user_id'
         ]);
 
-        $product = $this->Product->new(['id' => 1002]);
-        $this->assertTrue($this->Product->delete($product));
+        // test Delete record with different user_id
+        $product = $this->Product->get(1000);
+        $product->user_id = 12345;
+        $this->assertFalse($this->Product->delete($product));
     }
 }
