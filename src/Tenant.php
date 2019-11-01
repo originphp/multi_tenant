@@ -11,6 +11,7 @@
  * @link        https://www.originphp.com
  * @license     https://opensource.org/licenses/mit-license.php MIT License
  */
+declare(strict_types = 1);
 namespace MultiTenant;
 
 use Origin\Core\Exception\InvalidArgumentException;
