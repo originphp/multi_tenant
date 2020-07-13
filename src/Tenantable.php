@@ -40,7 +40,7 @@ trait Tenantable
      * @param ArrayObject $options
      * @return void
      */
-    protected function tenantBeforeFind(ArrayObject $options) : void
+    protected function tenantBeforeFind(ArrayObject $options): void
     {
         if (Tenant::initialized()) {
             $foreignKey = Tenant::foreignKey();
@@ -55,7 +55,7 @@ trait Tenantable
      * @param ArrayObject $options
      * @return void
      */
-    protected function tenantBeforeCreate(Entity $data, ArrayObject $options) : void
+    protected function tenantBeforeCreate(Entity $data, ArrayObject $options): void
     {
         if (Tenant::initialized()) {
             $foreignKey = Tenant::foreignKey();
@@ -70,7 +70,7 @@ trait Tenantable
      * @param ArrayObject $options
      * @return bool
      */
-    protected function tenantBeforeDelete(Entity $data, ArrayObject $options) : bool
+    protected function tenantBeforeDelete(Entity $data, ArrayObject $options): bool
     {
         if (Tenant::initialized()) {
             $foreignKey = Tenant::foreignKey();

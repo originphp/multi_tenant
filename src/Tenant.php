@@ -48,7 +48,7 @@ class Tenant
      *   - foreignKey: default tenant_id, can be user_id, or domain as well
      * @return void
      */
-    public static function initialize($id, array $options = []) : void
+    public static function initialize($id, array $options = []): void
     {
         $options += ['foreignKey' => 'tenant_id'];
 
@@ -75,7 +75,7 @@ class Tenant
      *
      * @return string
      */
-    public static function foreignKey() : string
+    public static function foreignKey(): string
     {
         return static::$foreignKey;
     }
@@ -85,7 +85,7 @@ class Tenant
      *
      * @return bool
      */
-    public static function initialized() : bool
+    public static function initialized(): bool
     {
         return ! empty(static::$id);
     }
