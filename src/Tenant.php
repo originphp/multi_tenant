@@ -52,7 +52,7 @@ class Tenant
     {
         $options += ['foreignKey' => 'tenant_id'];
 
-        if (! is_integer($id) and ! is_string($id)) {
+        if (! is_integer($id) && ! is_string($id)) {
             throw new InvalidArgumentException('Invalid Tenant ID');
         }
       
